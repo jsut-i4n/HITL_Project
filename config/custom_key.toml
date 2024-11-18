@@ -1,0 +1,11 @@
+# Example file of custom_key.toml. Rename to custom_key.toml while using.
+[KEY_LIST]
+# Perform a full component scan and registration for all the paths under this list.
+example_key = 'AnExampleKey'
+SERPER_API_KEY=''  # 谷歌搜索
+OPENAI_API_KEY='YourOpenAIKey'
+DASHSCOPE_API_KEY='sk-b2c2ccccfad9471b9758f0fcdf543133'   # 调用DASHSCOPE API  做embedding
+
+OLLAMA_BASE_URL="http://localhost:11434"   # 默认值
+
+REDIS_URL="redis://localhost:6379/0"  # 地址:端口/数据库

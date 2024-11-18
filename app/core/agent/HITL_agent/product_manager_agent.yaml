@@ -1,0 +1,20 @@
+info:
+  name: 'product_manager_agent'
+  description: 'product_manager_agent'
+profile:
+  prompt_version: product_manager_agent.cn
+  llm_model:
+    name: 'ollama_llm'  # ->llm文件夹
+    temperature: 0.4
+plan:
+  planner:
+    name: 'product_manager_planner'
+memory:
+  name: ''
+action:
+  tool:
+    - #'google_search_tool'
+metadata:
+  type: 'AGENT'
+  module: 'HITL_Project.app.core.agent.HITL_agent.default.product_manager_agent' # py文件
+  class: 'ProductManagerAgent'

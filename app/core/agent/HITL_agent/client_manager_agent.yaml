@@ -1,0 +1,17 @@
+info:
+  name: 'client_manager_agent'
+  description: 'client_manager_agent'
+profile:
+  prompt_version: client_manager_agent.cn
+  llm_model:
+    name: 'ollama_llm'
+    temperature: 0.5
+plan:
+  planner:
+    name: 'client_manager_planner'
+memory:
+  name: ''
+metadata:
+  type: 'AGENT'
+  module: 'HITL_Project.app.core.agent.HITL_agent.default.client_manager_agent'
+  class: 'ClientManagerAgent'

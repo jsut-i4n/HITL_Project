@@ -1,0 +1,6 @@
+name: 'operation_and_maintenance_engineer_planner'
+description: 'operation_and_maintenance_engineer_planner'
+metadata:
+  type: 'PLANNER'
+  module: 'HITL_Project.app.core.planner.default.operation_and_maintenance_engineer_planner'
+  class: 'OperationAndMaintenanceEngineerAgentPlanner'

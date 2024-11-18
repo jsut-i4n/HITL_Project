@@ -1,0 +1,16 @@
+info:
+  name: 'HITL_agent'
+  description: 'HITL Agent'
+plan:
+  planner:
+    name: 'HITL_planner'
+    eval_threshold: 60
+    retry_count: 5
+    CMA: 'client_manager_agent'
+    SAA: 'system_architect_agent'
+    OAM: 'operation_and_maintenance_engineer_agent'
+    DA: 'dispatcher_agent'
+metadata:
+  type: 'AGENT'
+  module: 'HITL_Project.app.core.agent.HITL_agent.HITL_agent'
+  class: 'HITLAgent'

@@ -1,0 +1,6 @@
+name: 'dispatcher_planner'
+description: 'dispatcher_planner'
+metadata:
+  type: 'PLANNER'
+  module: 'HITL_Project.app.core.planner.default.dispatcher_planner'
+  class: 'DispatcherPlanner'
