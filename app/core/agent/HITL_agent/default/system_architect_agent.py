@@ -27,7 +27,7 @@ class SystemArchitectAgent(Agent):
         # 一定有客户经理的结果
         for framework in input_object.get_data('client_manager_result').get_data('framework'):
             agent_input['input'] += '\n' + framework
-            input_object.add_data('sssss_framework', '\n' + framework)
+            input_object.add_data('s_framework', '\n' + framework)
             # TODO 查看input_object
         # 系统架构师获取运维工程师结果（不一定有）
         operation_and_maintenance_results = input_object.get_data('operation_and_maintenance_engineer_result')
@@ -64,5 +64,5 @@ class SystemArchitectAgent(Agent):
         """
         output_object = OutputObject(planner_result)
         planner_result['background'] = output_object.get_data('background').replace("\n", "")  # 获取文档内容
-        print("rag", planner_result)
+        # print("rag", planner_result)
         return {"system_architect_result": planner_result}
