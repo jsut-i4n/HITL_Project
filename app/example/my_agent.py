@@ -9,6 +9,9 @@ from agentuniverse.agent.agent_manager import AgentManager
 avatar_icon = {
     "user": Image.open('assets/user.png'),
     "client_manager": Image.open('assets/client_manager.png'),
+    'task_execute_one_agent':Image.open('assets/task_execute_one_agent.png'),
+    'task_execute_two_agent':Image.open('assets/task_execute_two_agent.png'),
+    'task_execute_three_agent':Image.open('assets/task_execute_three_agent.png'),
     "product_manager": Image.open('assets/product_manager.png'),
     "system_architect": Image.open('assets/system_architect.png'),
     "operation_and_maintenance_engineer_agent": Image.open('assets/operation_and_maintenance_engineer_agent.png'),
@@ -90,6 +93,26 @@ def main():
                 cm_res += f"[{index + 1}] {one_framework} \n"
             client_manager_result = cm_res
 
+            # Task_Excute_One_Result = output_object.get_data("output").get("task_excute_one_agent_result")
+            # task_excute_one_result: OutputObject = Task_Excute_One_Result.get_data("task_excute_one_agent_result").get(
+            #     "output")
+            
+            # Task_Excute_Two_Result = output_object.get_data("output").get("task_excute_two_agent_result")
+            # task_excute_two_result: OutputObject = Task_Excute_Two_Result.get_data("task_excute_two_agent_result").get(
+            #     "output")
+            
+            # Task_Excute_Three_Result = output_object.get_data("output").get("task_excute_three_agent_result")
+            # task_excute_three_result: OutputObject = Task_Excute_Three_Result.get_data("task_excute_three_agent_result").get(
+            #     "output")
+            Task_Excute_One_Result = output_object.get_data("output").get("task_result")
+            task_excute_one_result = Task_Excute_One_Result.get('task_excute_one_agent_result').get('output')
+
+            Task_Excute_Two_Result = output_object.get_data("output").get("task_result")
+            task_excute_two_result = Task_Excute_Two_Result.get('task_excute_two_agent_result').get('output')
+
+            Task_Excute_Three_Result = output_object.get_data("output").get("task_result")
+            task_excute_three_result = Task_Excute_Three_Result.get('task_excute_three_agent_result').get('output')
+            
             System_Architect_Result = output_object.get_data("output").get("system_architect_result")
             system_architect_result: OutputObject = System_Architect_Result.get_data("system_architect_result").get(
                 "output")
@@ -105,6 +128,9 @@ def main():
                 "operation_and_maintenance_engineer_result").get("output").get("suggestion")
 
             display_message("client_manager", client_manager_result)
+            display_message("task_execute_one_agent", task_excute_one_result)
+            display_message("task_execute_two_agent", task_excute_two_result)
+            display_message("task_execute_three_agent", task_excute_three_result)
             display_message("system_architect", system_architect_result)
             display_message("dispatcher_agent", dispatcher_agent_result)
             display_message("operation_and_maintenance_engineer_agent", operation_and_maintenance_engineer_result)

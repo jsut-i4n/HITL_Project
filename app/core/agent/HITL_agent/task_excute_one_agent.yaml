@@ -1,0 +1,22 @@
+info:
+  name: 'task_excute_one_agent'
+  description: 'task excute one agent for HITL'
+profile:
+  prompt_version: task_excute_one_agent.cn
+  llm_model:
+    name: 'ollama_llm'
+    temperature: 0.2
+    prompt_processor:
+      type: stuff
+plan:
+  planner:
+    name: 'task_excute_one_planner'
+memory:
+  name: ''
+action:
+  tool:
+    - ''  # 调度工具
+metadata:
+  type: 'AGENT'
+  module: 'HITL_Project.app.core.agent.HITL_agent.default.task_excute_one_agent'
+  class: 'TaskExcuteOneAgent'
