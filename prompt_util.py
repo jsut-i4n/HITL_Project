@@ -17,7 +17,20 @@ from agentuniverse.llm.llm_manager import LLMManager
 from agentuniverse.prompt.prompt_manager import PromptManager
 from agentuniverse.prompt.prompt_model import AgentPromptModel
 from agentuniverse.prompt.enum import PromptProcessEnum
+from textrank4zh import TextRank4Keyword, TextRank4Sentence
+import jieba.analyse
+from snownlp import SnowNLP
+import pandas as pd
+import numpy as np
 
+#关键词抽取
+def keywords_extraction(text):
+    tr4w = TextRank4Keyword(allow_speech_tags=['n', 'nr', 'nrfg', 'ns', 'nt', 'nz'])
+            # allow_speech_tags   --词性列表，用于过滤某些词性的词
+    tr4w.analyze(text=text, window=2, lower=True, vertex_source='all_filters', edge_source='no_stop_words',
+                                         pagerank_config={'alpha': 0.85, })
+    keywords = tr4w.get_keywords(num=6, word_min_len=2)
+    return keywords
 
 def summarize_by_stuff(texts: List[str], llm: LLM, summary_prompt):
     """
