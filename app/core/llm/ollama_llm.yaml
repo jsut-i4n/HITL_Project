@@ -1,0 +1,9 @@
+name: 'ollama_llm'
+description: '调用本地的ollama环境下的LLM模型'
+model_name: 'qwen2:7b'  # 如果算力高，可以用qwen2:72b，效果更好
+max_tokens: 1000
+max_context_length: 32000
+metadata:
+  type: 'LLM'
+  module: 'HITL_Project.app.core.llm.ollama_llm'
+  class: 'OllamaLLM'  # 类名

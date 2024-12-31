@@ -1,0 +1,12 @@
+name: 'HITL_agent_memory'
+description: 'HITL_agent_memory'
+type: 'long_term'
+memory_key: 'chat_history'
+input_key: 'input'
+output_key: 'output'
+max_tokens: 1000
+prompt_version: 'chat_memory.summarizer_cn'
+metadata:
+  type: 'MEMORY'
+  module: 'HITL_Project.app.core.memory.HITL_agent_memory'
+  class: 'HITLAgentMemory'

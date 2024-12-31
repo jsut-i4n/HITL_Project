@@ -1,0 +1,23 @@
+info:
+  name: 'operation_and_maintenance_engineer_agent'
+  description: 'operation_and_maintenance_engineer_agent'
+profile:
+  prompt_version: operation_and_maintenance_engineer_agent.cn
+  llm_model:
+    name: 'ollama_llm'
+    temperature: 0.2
+    prompt_processor:
+      type: stuff
+plan:
+  planner:
+    name: 'operation_and_maintenance_engineer_planner'
+memory:
+  name: ''
+action:
+  tool:
+    - 'efficiency_functions_tool'
+    - '' # 获取网络状态工具
+metadata:
+  type: 'AGENT'
+  module: 'HITL_Project.app.core.agent.HITL_agent.default.operation_and_maintenance_engineer_agent'
+  class: 'OperationAndMaintenanceEngineerAgent'

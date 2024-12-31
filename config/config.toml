@@ -1,0 +1,31 @@
+# config.toml
+[BASE_INFO]
+# The app name will be applied to all processes including agent service integration.
+appname = 'demo_app'
+
+[CORE_PACKAGE]
+
+default = ['HITL_Project.app.core']
+llm = ['HITL_Project.app.core.llm']
+# Scan and register tool components for all paths under this list, with priority over the default.
+tool = ['HITL_Project.app.core.tool']
+
+memory = ['HITL_Project.app.core.memory']
+
+# Scan and register prompt components for all paths under this list, with priority over the default.
+prompt = ['HITL_Project.app.core.prompt']
+
+agent = ['HITL_Project.app.core.agent']
+# Scan and register knowledge components for all paths under this list, with priority over the default.
+knowledge = ['HITL_Project.app.core.knowledge']
+# Scan and register planner components for all paths under this list, with priority over the default.
+planner = ['HITL_Project.app.core.planner']
+
+[SUB_CONFIG_PATH]
+
+custom_key_path = './custom_key.toml'   # api_key 模型请求地址
+log_config_path = './log_config.toml'  # 日志配置
+
+[MONITOR]
+activate = true  # 是否开启监控
+dir = './monitor'

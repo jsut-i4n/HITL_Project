@@ -1,0 +1,6 @@
+name: 'the_dream_of_red_mansions'
+description: 知识文档
+metadata:
+  type: 'KNOWLEDGE'
+  module: 'HITL_Project.app.core.knowledge.the_dream_of_red_mansions'
+  class: 'TheDreamOfRedMansions'

@@ -1,0 +1,6 @@
+name: 'task_excute_one_planner'
+description: 'task_excute_one_planner'
+metadata:
+  type: 'PLANNER'
+  module: 'HITL_Project.app.core.planner.default.task_excute_one_planner'
+  class: 'TaskExcuteOnePlanner'

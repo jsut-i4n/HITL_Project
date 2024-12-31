@@ -1,0 +1,23 @@
+info:
+  name: 'system_architect_agent'
+  description: 'system_architect_agent'
+profile:
+  prompt_version: system_architect_agent.cn
+  llm_model:
+    name: 'ollama_llm'
+    temperature: 0.2
+    prompt_processor:
+      type: stuff
+plan:
+  planner:
+    name: 'system_architect_planner'
+memory:
+  name: ''
+action:
+  knowledge:
+    #- 'the_dream_of_red_mansions' #HITL需要用到的设计文档，测试报告，使用手册，版本说明
+    - ''
+metadata:
+  type: 'AGENT'
+  module: 'HITL_Project.app.core.agent.HITL_agent.default.system_architect_agent'
+  class: 'SystemArchitectAgent'

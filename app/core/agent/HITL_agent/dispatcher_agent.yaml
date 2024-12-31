@@ -1,0 +1,22 @@
+info:
+  name: 'dispatcher_agent'
+  description: 'dispatcher agent for HITL'
+profile:
+  prompt_version: dispatcher_agent.cn
+  llm_model:
+    name: 'ollama_llm'
+    temperature: 0.2
+    prompt_processor:
+      type: stuff
+plan:
+  planner:
+    name: 'dispatcher_planner'
+memory:
+  name: ''
+action:
+  tool:
+    - ''  # 调度工具
+metadata:
+  type: 'AGENT'
+  module: 'HITL_Project.app.core.agent.HITL_agent.default.dispatcher_agent'
+  class: 'DispatcherAgent'

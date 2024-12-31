@@ -1,0 +1,59 @@
+{
+  "developed_region": {
+    "name": "发达地区",
+    "description": "当前场景下是发达地区",
+    "example": "JSON：[{'name': 'W(1,1)', 'desc': '发达地区，时延的权重描述。value应该是对该参数的描述', 'value': '时延低'}]\n输入：当前系统部署在经济发达地区，时延要求低，能耗较高\n答：{'name': 'W(1,2)', 'value': '能耗较高'}",
+    "parameters": [
+      {
+        "name": "W(1,1)",
+        "desc": "发达地区，对时延权重的描述。value应该是对该参数的描述",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "W(1,2)",
+        "desc": "发达地区，对能耗权重的描述，value应该是对该参数的描述",
+        "type": "string",
+        "required": true
+      }
+    ]
+  },
+  "middle-developed regions": {
+    "name": "中等发达地区",
+    "description": "当前场景是中等发达地区",
+    "example": "{'name':'W(2,1)','value':'xxx'},{'name':'W(2,2)','value':'xxx'}",
+    "parameters": [
+      {
+        "name": "W(2,1)",
+        "desc": "中等发达地区，对时延权重的描述。",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "W(2,2)",
+        "desc": "中等发达地区，对能耗权重的描述。",
+        "type": "string",
+        "required": true
+      }
+    ]
+  },
+  "developing regions": {
+    "name": "欠发达地区",
+    "description": "当前场景下是欠发达地区",
+    "example": "{'name':'W(3,1)','value':'xxx'},{'name':'W(3,2)','value':'xxx'}",
+    "parameters": [
+      {
+        "name": "W(3,1)",
+        "desc": "欠发达地区，对时延权重的描述。",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "W(3,2)",
+        "desc": "欠发达地区，对能耗权重的描述。",
+        "type": "string",
+        "required": true
+      }
+    ]
+  }
+}

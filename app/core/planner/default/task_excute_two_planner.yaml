@@ -1,0 +1,6 @@
+name: 'task_excute_two_planner'
+description: 'task_excute_two_planner'
+metadata:
+  type: 'PLANNER'
+  module: 'HITL_Project.app.core.planner.default.task_excute_two_planner'
+  class: 'TaskExcuteTwoPlanner'

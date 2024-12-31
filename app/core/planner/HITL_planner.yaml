@@ -1,0 +1,6 @@
+name: 'HITL_planner'
+description: 'HITL planner 工作流程'
+metadata:
+  type: 'PLANNER'
+  module: 'HITL_Project.app.core.planner.HITL_planner'
+  class: 'HITLPlanner'

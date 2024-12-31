@@ -1,0 +1,1 @@
+{"source": "client_manager_agent", "date": "2024-10-01 10:01:03", "agent_input": {"kwargs": {"input": "订机票", "session_id": "test_session"}}, "agent_output": {"chat_history": [], "background": "", "image_urls": [], "date": "2024-10-01", "input": "订机票", "output": "未命中场景", "slot_full": false}}

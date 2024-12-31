@@ -1,0 +1,11 @@
+name: 'efficiency_functions_tool'
+description: |
+  该工具是根据产生的w_e与w_t的值进行数值计算。
+  工具输入示例：
+    示例1: 当前系统部署在发达地区，W(1,1)时延权重要求低，W(1,2)能耗权重要要求高\n\n根据背景信息和优化目标的设定：\n\n- w_t（时延权重）= 0.25\n- w_e（能耗权重）= 0.75
+tool_type: 'api'
+input_keys: ['dispatcher_agent_result']
+metadata:
+  type: 'TOOL'
+  module: 'HITL_Project.app.core.tool.efficiency_functions_tool'
+  class: 'EfficiencyFunctionTool'
