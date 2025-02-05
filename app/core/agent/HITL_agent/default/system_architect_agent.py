@@ -23,12 +23,11 @@ class SystemArchitectAgent(Agent):
         Returns:
             dict: agent input parsed from `input_object` by the user.
         """
-        agent_input['input'] = input_object.get_data('input')
-        # 一定有客户经理的结果
-        for framework in input_object.get_data('client_manager_result').get_data('framework'):
-            agent_input['input'] += '\n' + framework
-            input_object.add_data('s_framework', '\n' + framework)
-            # TODO 查看input_object
+        agent_input['input'] = input_object.get_data('input') + "=" * 20
+        print("rawwda",input_object.get_data('task_result'))
+        agent_input['background'] += '\n' + input_object.get_data('task_result').get('task_excute_one_agent_result').get('output') + '\n' + "=" * 20
+        agent_input['background'] += '\n' + input_object.get_data('task_result').get('task_excute_two_agent_result').get('output') + '\n' + "=" * 20
+        agent_input['background'] += '\n' + input_object.get_data('task_result').get('task_excute_three_agent_result').get('output') + '\n' + "=" * 20
         # 系统架构师获取运维工程师结果（不一定有）
         operation_and_maintenance_results = input_object.get_data('operation_and_maintenance_engineer_result')
         if operation_and_maintenance_results:
@@ -63,6 +62,5 @@ class SystemArchitectAgent(Agent):
             dict: Agent result object.
         """
         output_object = OutputObject(planner_result)
-        planner_result['background'] = output_object.get_data('background').replace("\n", "")  # 获取文档内容
-        # print("rag", planner_result)
+        # planner_result['background'] = output_object.get_data('background').replace("\n", "")  # 获取文档内容
         return {"system_architect_result": planner_result}

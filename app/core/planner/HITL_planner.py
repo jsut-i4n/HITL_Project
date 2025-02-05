@@ -8,8 +8,13 @@ from agentuniverse.agent.output_object import OutputObject
 from agentuniverse.agent.plan.planner.planner import Planner
 from agentuniverse.base.util.logging.logging_util import LOGGER
 
+
+
 default_sub_agents = {
     'CMA': 'ClientManagerPlanner',
+    'TE_ONE': 'TaskExcuteOneAgent',
+    'TE_TWO': 'TaskExcuteTwoAgent',
+    'TE_THREE': 'TaskExcuteThreeAgent',
     'SAA': 'SystemArchitectAgent',
     'OAM': 'OperationAndMaintenanceEngineerAgent',
     'DA': 'DispatcherAgent',
@@ -21,6 +26,8 @@ default_jump_step = ''  # 可以选择跳过的智能体
 default_eval_threshold = 60
 
 default_retry_count = 3
+
+
 
 
 class HITLPlanner(Planner):
@@ -94,6 +101,10 @@ class HITLPlanner(Planner):
         system_architect_result = dict()
         operation_and_maintenance_engineer_result = dict()
         dispatcher_agent_result = dict()
+        
+        task_excute_one_agent_result = dict()
+        task_excute_two_agent_result = dict()
+        task_excute_three_agent_result = dict()
 
         retry_count = planner_config.get('retry_count', default_retry_count)  # -> 在HITL_agent.yaml中配置,未配置则使用默认值
         jump_step = planner_config.get('jump_step', default_jump_step)
@@ -106,6 +117,13 @@ class HITLPlanner(Planner):
         operationAndMaintenanceEngineerAgent: Agent = agents.get('OAM')
         dispatcherAgent: Agent = agents.get('DA')
 
+        taskExcuteOneAgent: Agent = agents.get('TE_ONE')
+        taskExcuteTwoAgent: Agent = agents.get('TE_TWO')
+        taskExcuteThreeAgent: Agent = agents.get('TE_THREE')
+
+    
+
+   
 
         LOGGER.info(f"Starting Account Manager agent.")
         if not client_manager_result or jump_step == "CMA":
@@ -123,18 +141,77 @@ class HITLPlanner(Planner):
             input_object.add_data('client_manager_result', client_manager_result)
             # add client Manager Agent log info
             logger_info = f"\nAccount Manager agent execution result is :\n"
-
-            # # framework 是子问题列表
-            # for index, one_framework in enumerate(client_manager_result.get_data('framework')):
-            #     logger_info += f"[{index + 1}] {one_framework} \n"
+            #logger_info += client_manager_result.get_data('framework')
+            # framework 是子问题列表
+            for index, one_framework in enumerate(client_manager_result.get_data('framework')):
+                logger_info += f"[{index + 1}] {one_framework} \n"
             LOGGER.info(logger_info)
-
-        
-
-            # 从系统架构师开始，要循环，直到达到评估阈值，或者达到最大重试次数
+            
+            agent_mapping = {
+                '政治': agents.get('TE_ONE'),
+                '经济': agents.get('TE_TWO'),
+                '文化': agents.get('TE_THREE'),
+                # 添加更多的键和对应的 agent 映射
+            }
+            
+            # 从任务执行智能体--系统架构师开始，要循环，直到达到评估阈值，或者达到最大重试次数
             for i in range(retry_count):
-                LOGGER.info(f"Starting iteration {i + 1} of {retry_count}")
+
+
+                task_result = dict()
+                for item in client_manager_result.get_data('framework'):
+                    for k, v in item.items():
+                        selected_agent = agent_mapping.get(k, agents.get('TE_ONE'))  # 使用 TE_ONE 作为默认 agent
+                        if selected_agent:
+                            #LOGGER.info(f"Starting {selected_agent}.")
+                            res = selected_agent.run(**input_object.to_dict())
+                            task_result.update(res.to_dict())
+                        else:
+                            LOGGER.info(f"Error When Selected Agent")
+                input_object.add_data('task_result', task_result)
+
+                # LOGGER.info(f"Starting iteration {i + 1} of {retry_count}")
                 
+                # if not taskExcuteOneAgent:
+                #     LOGGER.warn('no Task Execute One agent.')
+                #     task_excute_one_agent_result = OutputObject({})
+                # else:
+                #     LOGGER.info(f"Starting Task Execute One agent.")
+                #     task_excute_one_agent_result = taskExcuteOneAgent.run(**input_object.to_dict())
+                
+                # input_object.add_data('task_excute_one_agent_result', task_excute_one_agent_result)
+                # # add expressing agent log info
+                # logger_info = f"\nTask Execute One agent result is :\n"
+                # logger_info += f"{task_excute_one_agent_result.get_data('task_excute_one_agent_result').get('output')}"
+                # LOGGER.info(logger_info)
+                
+                # if not taskExcuteTwoAgent:
+                #     LOGGER.warn('no Task Execute Two agent.')
+                #     task_excute_two_agent_result = OutputObject({})
+                # else:
+                #     LOGGER.info(f"Starting Task Execute Two agent.")
+                #     task_excute_two_agent_result = taskExcuteTwoAgent.run(**input_object.to_dict())
+                
+                # input_object.add_data('task_excute_two_agent_result', task_excute_two_agent_result)
+                # # add expressing agent log info
+                # logger_info = f"\nTask Execute Two agent result is :\n"
+                # logger_info += f"{task_excute_two_agent_result.get_data('task_excute_two_agent_result').get('output')}"
+                # LOGGER.info(logger_info)
+
+                # if not taskExcuteThreeAgent:
+                #     LOGGER.warn('no Task Execute Three agent.')
+                #     task_excute_three_agent_result = OutputObject({})
+                # else:
+                #     LOGGER.info(f"Starting Task Execute Three agent.")
+                #     task_excute_three_agent_result = taskExcuteThreeAgent.run(**input_object.to_dict())
+                
+                # input_object.add_data('task_excute_three_agent_result', task_excute_three_agent_result)
+                # # add expressing agent log info
+                # logger_info = f"\nTask Execute Three agent result is :\n"
+                # logger_info += f"{task_excute_three_agent_result.get_data('task_excute_three_agent_result').get('output')}"
+                # LOGGER.info(logger_info)
+
+
                 # if not system_architect_result or jump_step in ["CMA", "SAA"]:
                 if not systemArchitectAgent:
                     LOGGER.warn("no System Architect agent.")
@@ -168,6 +245,7 @@ class HITLPlanner(Planner):
                     # operation_and_maintenance_engineer_result = OutputObject({})
                     loopResults.append({
                         "client_manager_result": client_manager_result,
+                        "task_result":task_result,
                         "system_architect_result": system_architect_result,
                         "dispatcher_agent_result": dispatcher_agent_result,
                         "operation_and_maintenance_engineer_result": operation_and_maintenance_engineer_result
@@ -190,6 +268,7 @@ class HITLPlanner(Planner):
                         # OAM的评价分大于阈值 则返回结果
                         loopResults.append({
                             "client_manager_result": client_manager_result,
+                            "task_result":task_result,
                             "system_architect_result": system_architect_result,
                             "dispatcher_agent_result": dispatcher_agent_result,
                             "operation_and_maintenance_engineer_result": operation_and_maintenance_engineer_result
@@ -199,6 +278,10 @@ class HITLPlanner(Planner):
                     else:
                         loopResults.append({
                             "client_manager_result": client_manager_result,
+                            "task_result":task_result,
+                            #"task_excute_one_agent_result": task_excute_one_agent_result,
+                            #"task_excute_two_agent_result": task_excute_two_agent_result,
+                            #"task_excute_three_agent_result": task_excute_three_agent_result,
                             "system_architect_result": system_architect_result,
                             "dispatcher_agent_result": dispatcher_agent_result,
                             "operation_and_maintenance_engineer_result": operation_and_maintenance_engineer_result
